@@ -130,10 +130,9 @@ pub fn handle_program_log(
         };
 
         let mut slice: &[u8] = &borsh_bytes[..];
-        let disc: [u8; 8] = {
-            let mut disc = [0; 8];
-            disc.copy_from_slice(&borsh_bytes[..8]);
-            slice = &slice[8..];
+        let disc: &[u8] = {
+            let disc = &borsh_bytes[..8]; // 引用 borsh_bytes 的前 8 字节
+            slice = &slice[8..]; // 调整 slice，跳过前 8 字节
             disc
         };
         match disc {
@@ -298,10 +297,9 @@ pub fn handle_program_instruction(
     }
 
     let mut ix_data: &[u8] = &data[..];
-    let disc: [u8; 8] = {
-        let mut disc = [0; 8];
-        disc.copy_from_slice(&data[..8]);
-        ix_data = &ix_data[8..];
+    let disc: &[u8] = {
+        let disc = &data[..8]; // 引用 data 的前 8 个字节作为切片
+        ix_data = &ix_data[8..]; // 更新 ix_data，跳过前 8 字节
         disc
     };
     // println!("{:?}", disc);

@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+
 use anchor_client::{Client, Cluster};
 use anyhow::{format_err, Result};
 use arrayref::array_ref;
